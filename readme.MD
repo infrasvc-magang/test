@@ -1,6 +1,6 @@
 # About
 
-** mohon koreksi jika ada yang salah **
+**mohon koreksi jika ada yang salah**
 
 ## About Project
 Proyek web development PowerPoint material maker using GPT dirancang oleh teman-teman KP lab. ISR Telkom periode Juli 2024 - Agustus 2024.
