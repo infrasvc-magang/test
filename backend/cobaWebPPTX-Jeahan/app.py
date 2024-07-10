@@ -6,7 +6,7 @@ from pptx.util import Pt
 from flask import Flask, request, render_template, send_file, jsonify
 
 app = Flask(__name__)
-openai.api_key = "ITU_API_KEY"
+openai.api_key = "INITUH_API_KEY"
 
 @app.route('/')
 def index():
