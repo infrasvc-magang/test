@@ -1,14 +1,13 @@
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql import func
 from datetime import datetime
 import os
 
-# Ensure the instance folder exists
-if not os.path.exists('instance'):
-    os.makedirs('instance')
+basedir = os.path.abspath(os.path.dirname(__file__))
 
-app = Flask(__name__, instance_path=os.path.join(os.path.abspath(os.curdir), 'instance'))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app = Flask(__name__ )
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'test.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -21,9 +20,6 @@ class Todo(db.Model):
     def __repr__(self):
         return '<Task %r>' % self.id
 
-# Ensure the database is created
-with app.app_context():
-    db.create_all()
 
 @app.route('/', methods=['POST', 'GET'])
 def index():

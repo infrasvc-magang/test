@@ -5,6 +5,7 @@ from pptx import Presentation
 from pptx.util import Pt
 from flask import Flask, request, render_template, send_file, jsonify
 
+
 app = Flask(__name__)
 openai.api_key = "YOUR_API_KEY"
 
@@ -101,6 +102,14 @@ def generate():
     filename = os.path.join('PPTX', f"{presentation_title.replace(' ', '_')}_presentation.pptx")
     prs.save(filename)
 
+    # Mengembalikan respon sukses dengan link untuk mengunduh file
+    return jsonify({
+        "message": "Presentation created successfully",
+        "download_link": request.host_url + 'download/' + filename
+    }), 200
+
+@app.route('/download/<path:filename>', methods=['GET'])
+def download_file(filename):
     return send_file(filename, as_attachment=True)
 
 if __name__ == '__main__':
