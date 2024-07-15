@@ -4,13 +4,33 @@ import json
 from pptx import Presentation
 from pptx.util import Pt
 from flask import Flask, request, render_template, send_file, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 app = Flask(__name__)
-openai.api_key = "API_KEY"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///presentations.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+openai.api_key = "YOUR_API_KEY"
+
+class PresentationHistory(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    download_link = db.Column(db.String(200), nullable=False)
+
+with app.app_context():
+    db.create_all()
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    history = PresentationHistory.query.order_by(PresentationHistory.created_at.desc()).all()
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        return render_template('history_table.html', history=history)
+    return render_template('index.html', history=history)
+    #history = PresentationHistory.query.order_by(PresentationHistory.created_at.desc()).all()
+    #return render_template('index.html', history=history)
 
 @app.route('/generate', methods=['POST'])
 def generate():
@@ -97,8 +117,14 @@ def generate():
     filename = os.path.join('PPTX', f"{presentation_title.replace(' ', '_')}_presentation.pptx")
     prs.save(filename)
 
-    # Return success response with download link
     download_link = request.host_url + 'download/' + filename
+
+    # Save to database
+    new_presentation = PresentationHistory(title=presentation_title, download_link=download_link)
+    db.session.add(new_presentation)
+    db.session.commit()
+
+    # Return success response with download link
     return jsonify({
         "message": "Presentation created successfully",
         "download_link": download_link
