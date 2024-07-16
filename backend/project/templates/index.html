@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generate Presentation</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <style>
+       <style>
+</style>
+
+    </style>
     <script>
         function showPopup(message, downloadLink) {
             const popup = document.getElementById('popup');
@@ -112,7 +117,7 @@
                 <th>Action</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="presentation-table">
             {% for record in history %}
             <tr>
                 <td>{{ record.title }}</td>

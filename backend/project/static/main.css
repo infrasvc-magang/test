@@ -23,6 +23,7 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 20px; /* Menambahkan margin bawah pada form */
 }
 
 label {
