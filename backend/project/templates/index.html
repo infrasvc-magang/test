@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generate Presentation</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <style>
+       <style>
+</style>
+
+    </style>
     <script>
         function showPopup(message, downloadLink) {
             const popup = document.getElementById('popup');
@@ -64,6 +69,20 @@
             const oldTable = document.querySelector('table');
             oldTable.innerHTML = newTable.innerHTML;
         }
+
+        async function filterTable() {
+            const query = document.getElementById('search-query').value.toLowerCase();
+            const tableRows = document.querySelectorAll('#presentation-table tr');
+
+            tableRows.forEach(row => {
+                const title = row.querySelector('td:first-child').textContent.toLowerCase();
+                if (title.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
     </script>
 </head>
 <body>
@@ -77,6 +96,10 @@
         </div>
     </form>
 
+    <div class="search-container">
+        <input type="text" id="search-query" name="query" placeholder="Search by title..." onkeyup="filterTable()">
+    </div>
+
     <table>
         <thead>
             <tr>
@@ -85,7 +108,7 @@
                 <th>Link Download</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="presentation-table">
             {% for record in history %}
             <tr>
                 <td>{{ record.title }}</td>

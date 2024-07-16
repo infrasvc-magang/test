@@ -7,7 +7,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     margin: 0;
 }
 
@@ -24,6 +23,7 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 20px; /* Menambahkan margin bawah pada form */
 }
 
 label {
@@ -95,7 +95,8 @@ button:hover {
 }
 
 table {
-    margin-top: 20px;
+    margin-top: 5px; /* Menyesuaikan margin-top tabel menjadi lebih kecil */
+    margin-bottom: 20px; /* Menambahkan margin bawah pada tabel */
     width: 80%;
     border-collapse: collapse;
 }
@@ -116,3 +117,37 @@ th {
 td a {
     color: #3498db;
 }
+
+/* CSS untuk mengatur tampilan */
+.search-container {
+    margin: 10px auto 20px; /* Menyesuaikan margin atas 10px, otomatis di tengah, dan margin bawah 20px */
+    text-align: center; /* Memastikan isi dari search-container berada di tengah */
+    width: 80%; /* Menyesuaikan lebar sesuai kebutuhan */
+}
+
+.search-container input[type=text] {
+    width: 200px;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-right: 10px; /* Menambahkan margin kanan untuk memisahkan dengan tombol */
+}
+
+.search-container button {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Jika masih terlalu jauh, sesuaikan margin atau padding di tempat lain di dalam CSS Anda */

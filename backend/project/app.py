@@ -29,8 +29,6 @@ def index():
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         return render_template('history_table.html', history=history)
     return render_template('index.html', history=history)
-    #history = PresentationHistory.query.order_by(PresentationHistory.created_at.desc()).all()
-    #return render_template('index.html', history=history)
 
 @app.route('/generate', methods=['POST'])
 def generate():
@@ -133,6 +131,19 @@ def generate():
 @app.route('/download/<path:filename>', methods=['GET'])
 def download_file(filename):
     return send_file(filename, as_attachment=True)
+
+@app.route('/search', methods=['GET'])
+def search():
+    query = request.args.get('query')
+    if query:
+        search_results = PresentationHistory.query.filter(PresentationHistory.title.ilike(f'%{query}%')).order_by(PresentationHistory.created_at.desc()).all()
+    else:
+        search_results = PresentationHistory.query.order_by(PresentationHistory.created_at.desc()).all()
+
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        return render_template('history_table.html', history=search_results)
+
+    return render_template('index.html', history=search_results)
 
 if __name__ == '__main__':
     app.run(debug=True)
