@@ -25,13 +25,11 @@ with app.app_context():
 
 @app.route('/')
 def index():
+
     history = PresentationHistory.query.order_by(PresentationHistory.created_at.desc()).all()
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         return render_template('history_table.html', history=history)
     return render_template('index.html', history=history)
-    #history = PresentationHistory.query.order_by(PresentationHistory.created_at.desc()).all()
-    #return render_template('index.html', history=history)
-
 @app.route('/generate', methods=['POST'])
 def generate():
     request_data = request.get_json()
@@ -129,6 +127,20 @@ def generate():
         "message": "Presentation created successfully",
         "download_link": download_link
     }), 200
+
+@app.route('/delete/<int:id>', methods=['POST'])
+def delete(id):
+    presentation = PresentationHistory.query.get_or_404(id)
+    db.session.delete(presentation)
+    db.session.commit()
+    return jsonify({"message": "Presentation deleted successfully"}), 200
+
+@app.route('/search', methods=['GET'])
+def search():
+    search_query = request.args.get('query', '')
+    history = PresentationHistory.query.filter(PresentationHistory.title.ilike(f'%{search_query}%')).order_by(PresentationHistory.created_at.desc()).all()
+    return render_template('history_table.html', history=history)
+
 
 @app.route('/download/<path:filename>', methods=['GET'])
 def download_file(filename):

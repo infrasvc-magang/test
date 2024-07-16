@@ -64,6 +64,28 @@
             const oldTable = document.querySelector('table');
             oldTable.innerHTML = newTable.innerHTML;
         }
+
+        async function deletePresentation(id) {
+            const response = await fetch(`/delete/${id}`, { method: 'POST' });
+            const result = await response.json();
+            if (response.ok) {
+                alert(result.message);
+                updateHistory();
+            } else {
+                alert(result.error);
+            }
+        }
+
+        async function searchPresentations() {
+            const query = document.getElementById('search').value;
+            const response = await fetch(`/search?query=${query}`);
+            const html = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const newTable = doc.querySelector('table');
+            const oldTable = document.querySelector('table');
+            oldTable.innerHTML = newTable.innerHTML;
+        }
     </script>
 </head>
 <body>
@@ -77,12 +99,17 @@
         </div>
     </form>
 
+    <div class="search-container">
+        <input type="text" id="search" placeholder="Search presentations..." onkeyup="searchPresentations()">
+    </div>
+
     <table>
         <thead>
             <tr>
                 <th>Judul Presentasi</th>
                 <th>Waktu Dibuat</th>
                 <th>Link Download</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -91,6 +118,7 @@
                 <td>{{ record.title }}</td>
                 <td>{{ record.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
                 <td><a href="{{ record.download_link }}" target="_blank">Download</a></td>
+                <td><button onclick="deletePresentation({{ record.id }})">Delete</button></td>
             </tr>
             {% endfor %}
         </tbody>

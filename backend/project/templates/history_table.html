@@ -1,17 +1,20 @@
-<!-- templates/history_table.html -->
-<thead>
-    <tr>
-        <th>Judul Presentasi</th>
-        <th>Waktu Dibuat</th>
-        <th>Link Download</th>
-    </tr>
-</thead>
-<tbody>
-    {% for record in history %}
-    <tr>
-        <td>{{ record.title }}</td>
-        <td>{{ record.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
-        <td><a href="{{ record.download_link }}" target="_blank">Download</a></td>
-    </tr>
-    {% endfor %}
-</tbody>
+<table>
+    <thead>
+        <tr>
+            <th>Judul Presentasi</th>
+            <th>Waktu Dibuat</th>
+            <th>Link Download</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for record in history %}
+        <tr>
+            <td>{{ record.title }}</td>
+            <td>{{ record.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+            <td><a href="{{ record.download_link }}" target="_blank">Download</a></td>
+            <td><button onclick="deletePresentation({{ record.id }})">Delete</button></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

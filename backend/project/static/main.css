@@ -7,7 +7,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     margin: 0;
 }
 
@@ -95,7 +94,7 @@ button:hover {
 }
 
 table {
-    margin-top: 20px;
+    margin-top: 5px;
     width: 80%;
     border-collapse: collapse;
 }
@@ -115,4 +114,34 @@ th {
 
 td a {
     color: #3498db;
+}
+
+td button {
+    background-color: #e74c3c;
+    color: #ffffff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+td button:hover {
+    background-color: #c0392b;
+}
+
+/* Additional CSS for the search bar */
+.search-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 5px;
+    margin-left: 885px;
+}
+
+.search-container input[type=text] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    width: 200px; /* Adjust width as needed */
 }
