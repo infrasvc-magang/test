@@ -15,32 +15,32 @@ Masih memiliki sedikit fitur yaitu:
 ## How to use
 
 ### 1. Requirement
-    - Install openai, pptx, flask, dan Flask-SQLAlchemy. 
-      ```
-      pip install openai
-      pip install python--pptx
-      pip install flask
-      pip install flask-sqlalchemy
-      ```
-    - Memiliki API KEY openAI (subscribe ke openAI)
+1.1. Install openai, pptx, flask, dan Flask-SQLAlchemy. 
+```
+pip install openai
+pip install python--pptx
+pip install flask
+pip install flask-sqlalchemy
+```
+1.2. Memiliki API KEY openAI (subscribe ke openAI)
 
 ### 2. Menjalankan aplikasi
 
-    - Copy repo ke lokal pengguna.
-      ```
-      git clone https://github.com/infrasvc-magang/test-Internship-July2024.git
-      ```
+2.1. Copy repo ke lokal pengguna.
+```
+git clone https://github.com/infrasvc-magang/test-Internship-July2024.git
+```
 
-    - Buka terminal pada direktory project.
-      ```
-      cd <path_to_test-Internship-July2024>/backend/project
-      ```
+2.2. Buka terminal pada direktory project.
+```
+cd <path_to_test-Internship-July2024>/backend/project
+```
 
-    - Jalankan aplikasi.
-      ```
-      python app.py
-      ```
+2.3. Jalankan aplikasi.
+```
+python app.py
+```
 
-    - Buka alamat yang diberikan pada browser.
+2.4. Buka alamat yang diberikan pada browser.
 
 
