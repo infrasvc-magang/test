@@ -8,7 +8,7 @@ Masih memiliki sedikit fitur yaitu:
 - Fitur tabel riwayat pembuatan presentasi.
 - Fitur delete presentasi pada tabel riwayat.
 - Fitur *search* presentasi.
-- Fitu pilihan update atau buat baru jika presentasi sudah pernah dibuat.
+- Fitur pilihan update atau buat baru jika presentasi sudah pernah dibuat.
 
 **proyek ini masih dalam progress**
 
@@ -31,7 +31,7 @@ pip install flask-sqlalchemy
 git clone https://github.com/infrasvc-magang/test-Internship-July2024.git
 ```
 
-2.2. Buka terminal pada direktory project.
+2.2. Buka terminal pada direktori project.
 ```
 cd <path_to_test-Internship-July2024>/backend/project
 ```
