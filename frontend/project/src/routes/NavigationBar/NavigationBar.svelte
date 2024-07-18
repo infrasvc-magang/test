@@ -1,4 +1,4 @@
-<script 'lang '>
+<script>
   import {
     Collapse,
     NavbarToggler,
