@@ -56,11 +56,11 @@
         <img src="/coding.gif" style="width: 300px" alt="coding" />
       </Col>
       <Col xs="6" class="d-flex flex-column justify-content-center align-items-center" style="padding: 50px">
-        <h3>Ayo buat PowerPoint-mu sekarang!</h3>
-        <p>Contoh : Berikan deskripsi lengkap mengenai panda</p>
+        <h3>Make Your PowerPoint Now!</h3>
+        <p>Example : Telecommunication Engineering</p>
         <Form {validated} on:submit={(e) => e.preventDefault()}>
           <FormGroup>
-            <Input type="textarea" placeholder="Ketik disini" bind:value={inputText} style="width : 200px"/>
+            <Input placeholder="Presentation title" value={inputText} style=" width:200px"/>
           </FormGroup>
           <div class="button-wrapper">
             <Button class="centered-button" type="submit" on:click={handleGenerateClick}>Generate</Button>
