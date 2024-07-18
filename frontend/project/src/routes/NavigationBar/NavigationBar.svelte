@@ -58,7 +58,6 @@
     </Nav>
   </Collapse>
 </Navbar>
->>>>>>> 195ec0d1df999fbc73e09e36636394aadfac674f
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
