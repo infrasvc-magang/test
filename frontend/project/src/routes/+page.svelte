@@ -21,7 +21,7 @@
         align-items: center;
         height: calc(100vh - 70px); /* Adjust according to your navigation bar height */
         padding: 20px;
-        background-color: #F9E2AF;
+        background-color: #FAEED1;
     }
     .image-container {
         flex: 1;

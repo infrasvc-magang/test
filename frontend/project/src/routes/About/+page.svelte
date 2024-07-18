@@ -54,7 +54,7 @@
 
 <style>
     .content {
-        background-color: #F9E2AF;
+        background-color: #FAEED1;
         padding: 20px;
     }
 
@@ -65,7 +65,7 @@
     }
 
     .feature-item {
-        background: #fff;
+        background: #FDF7E4;
         border-radius: 8px;
         padding: 20px;
         margin: 10px;
