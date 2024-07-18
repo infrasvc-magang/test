@@ -39,7 +39,7 @@
     <NavbarToggler on:click={() => (isOpen = !isOpen)} />
     <Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
       <Nav class="ms-auto" navbar>
-        <NavItem>
+        <NavItem>  
           <NavLink on:click={handleHomeClick}>Home</NavLink>
         </NavItem>
         <NavItem>
@@ -59,9 +59,12 @@
   </Navbar>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
     
     :global(.navbar, .navbar-brand, .nav-link, .dropdown-item) {
-        font-family: 'Oswald';
+        font-family: 'Poppins';
     }
+    
+   
 </style>
+
