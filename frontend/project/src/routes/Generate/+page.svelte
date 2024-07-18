@@ -14,15 +14,14 @@
   :global(html, body) {
     height: 100%;
     margin: 0;
-    background-color: #FAEED1; 
-    font-family: 'Poppins', sans-serif; /* Menggunakan font Poppins */
+    background-color: #FAEED1;
+    font-family: 'Poppins', sans-serif;
   }
   .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    font-family: 'Poppins', sans-serif; /* Menggunakan font Poppins */
     min-height: 100vh;
   }
   .results {
