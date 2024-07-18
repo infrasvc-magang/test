@@ -1,27 +1,26 @@
 <script>
     import NavigationBar from "../NavigationBar/NavigationBar.svelte";
-    import { Container } from '@sveltestrap/sveltestrap';
-
+    import { Container, Row, Col } from '@sveltestrap/sveltestrap';
     const items = [
         {
             icon: "/ppt.png",
-            title: "Membuat presentasi secara instan",
-            description: "Cukup berikan konten Anda kepada kami, dan lihat bagaimana kami mengubahnya menjadi presentasi PowerPoint yang rapi dalam hitungan menit."
+            title: "Create presentations instantly",
+            description: "Just give us your content, and see how we transform it into a neat PowerPoint presentation in just minutes. "
         },
         {
             icon: "/hand.png",
-            title: "Kustomisasi dengan mudah",
-            description: "Website kami menawarkan kostumisasi isi konten ppt, memungkinkan Anda menyesuaikan presentasi sesuai kebutuhan dan preferensi Anda dengan cepat."
+            title: "Customize easily",
+            description: "Our website offers customization of ppt content, allowing you to quickly adapt your presentation to your needs and preferences."
         },
         {
             icon: "time-save.png",
-            title: "Meningkatkan efisiensi",
-            description: "Habiskan lebih sedikit waktu untuk memformat slide dan lebih banyak waktu untuk fokus pada konten dan penyampaian Anda."
+            title: "Increase efficiency",
+            description: "Spend less time formatting slides and more time focusing on your content."
         },
         {
             icon: "/artificial-intelligence.png",
-            title: "Insight berbasis AI",
-            description: "Manfaatkan saran dan peningkatan yang dihasilkan AI untuk membuat presentasi Anda lebih berdampak dan menarik."
+            title: "AI-based insights",
+            description: "Take advantage of AI-generated suggestions and improvements to make your presentations more impactful and engaging."
         }
     ];
 </script>
@@ -32,10 +31,10 @@
     <Container fluid>
         <div class="container">
             <br>
-            <h3><b>Tentang Kami</b></h3>
-            <p>Selamat datang di PPT Maker, solusi terbaik Anda untuk membuat presentasi PowerPoint yang menakjubkan secara otomatis.</p>
-            <h3><b>Apa yang Kami Tawarkan</b></h3>
-            <p>PPT Maker didukung oleh ChatGPT, model bahasa AI canggih yang dikembangkan oleh OpenAI. Dengan platform inovatif kami, Anda dapat:</p>
+            <h3><b>About Us</b></h3>
+            <p>Welcome to PPT Maker, your ultimate solution for automatically creating stunning PowerPoint presentations. This website was designed by the KP lab.ISR Telkom team for the period of July 2024 - August 2024.</p>
+            <h3><b>What We Offer</b></h3>
+            <p>PPT Maker is powered by ChatGPT, an advanced AI language model developed by OpenAI. With our innovative platform, you can:</p>
             <div class="features">
                 {#each items as item}
                     <div class="feature-item">
@@ -47,12 +46,37 @@
             </div>
             <br>
             <br>
-            <p>Terima kasih telah memilih PPT Maker. Kami sangat bersemangat untuk membantu Anda membuat presentasi yang mengesankan dan menginspirasi.</p>
+            <p style="font-family: 'Roboto', sans-serif;"> Thank you for choosing PPT Maker. We are passionate about helping you create memorable and inspiring presentations.</p>
         </div>
+    </Container>
+
+    <Container fluid style="margin-top: 100px; background-color: #F8EDE3; padding: 50px;">
+        <Row>
+            <Col xs={12}>
+                <h2 class="text-center" style="font-family: 'Roboto', sans-serif; font-weight: 700;">ISR Team :</h2>
+              </Col>
+            <Col xs={6}>
+              <h3 class="container">Frontend:</h3>
+              <ul>
+                <li>Zahra Bintang Pratiwi</li>
+                <li>Mochamad Rafi Alfian Prakoso</li>
+                <li>Divany Maulidyna Putri</li>
+              </ul>
+            </Col>
+            <Col xs={6}>
+              <h3 class="container text-right">Backend:</h3>
+              <ul class="text-right">
+                <li>Alvaro Ahmad Firdaus</li>
+                <li>Jeahan Fitria Goenadiningrat</li>
+                <li>Najmi Azzahra F.</li>
+              </ul>
+            </Col>
+          </Row>
     </Container>
 </div>
 
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'); 
     .content {
         background-color: #FAEED1;
         padding: 20px;
