@@ -32,8 +32,8 @@
     text-align: center;
     height: 100vh;
     flex-direction: column;
-    background-color: #4A249D;
-    color : #F9E2AF;
+    background-color: #FAEED1;
+    color : #000000;
   }
 
 

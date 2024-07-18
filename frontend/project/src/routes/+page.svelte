@@ -21,7 +21,11 @@
         align-items: center;
         height: calc(100vh - 70px); /* Adjust according to your navigation bar height */
         padding: 20px;
+<<<<<<< HEAD
         background: linear-gradient(to left, #FFF5E0, #FF6969);
+=======
+        background-color: #FAEED1;
+>>>>>>> 195ec0d1df999fbc73e09e36636394aadfac674f
     }
     .image-container {
         flex: 1;

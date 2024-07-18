@@ -48,7 +48,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
     .halaman-login {
-        background: #009FBD;
+        background: #FAEED1;
         display: flex;
         align-items: center;
         justify-content: center;
