@@ -32,7 +32,7 @@
     }
   </script>
   
-  <Navbar style="background-color : transparent" light expand="md" container="md">
+  <Navbar style="transparent" light expand="md" container="md">
     <NavbarBrand href="/">
       <img src="/a_1.png" alt="Logo" style="height: 30px; margin-right: 10px;" />
       Powered by Open AI</NavbarBrand>
@@ -43,10 +43,10 @@
           <NavLink on:click={handleHomeClick}>Home</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink on:click={handleAboutClick}>About</NavLink>
+          <NavLink on:click={handleAboutClick} style="margin-left : 3rem">About</NavLink>
         </NavItem>
         <Dropdown nav inNavbar>
-          <DropdownToggle nav caret>Menu</DropdownToggle>
+          <DropdownToggle nav caret style="margin-left : 3rem">Menu</DropdownToggle>
           <DropdownMenu end>
             <DropdownItem on:click={handleLoginClick}>Login</DropdownItem>
             <DropdownItem on:click={handleRegisterClick}>Register</DropdownItem>
