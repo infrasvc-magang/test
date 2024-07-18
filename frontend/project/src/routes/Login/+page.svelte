@@ -6,8 +6,10 @@
     let password = '';
     let errorMessage = '';
     let successMessage = '';
+    let isLoading = false;
 
     async function handleSubmit(event) {
+        isLoading = true;
         event.preventDefault();
 
         if (!email || !password) {
@@ -40,11 +42,12 @@
             }
         } catch (error) {
             errorMessage = 'Login gagal, silakan coba lagi';
-        }
-    }
+        } 
+        isLoading = false;
+    };
     function handleRegisterClick(){
     window.location.href='/Register';
-  }
+  };
 </script>
 <NavigationBar/>
 <style>
@@ -183,42 +186,58 @@
     .sign-up:hover{
         color: #0078A0;
     }
+    .spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #333; /* Adjust spinner color */
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
 </style>
 
 <div class="halaman-login">
     <div class="rectangle-8">
-        <div class="container-3">
-            <img src="/a_1.png" alt="Logo" class="logo">
-            <div class="halaman-login-1">Login</div>
-            <form on:submit|preventDefault={handleSubmit}>
-                <div class="form-group">
-                    <label for="email" class="email">Email</label>
-                    <div class="rectangle-9">
-                        <input type="email" id="email" bind:value={email} class="input-field" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password" class="password">Password</label>
-                    <div class="rectangle-10">
-                        <input type="password" id="password" bind:value={password} class="input-field" />
-                    </div>
-                </div>
-                {#if errorMessage}
-                    <p class="error">{errorMessage}</p>
-                {/if}
-                {#if successMessage}
-                    <p class="success">{successMessage}</p>
-                {/if}
-                <div class="container">
-                    <div class="container-1">
-                        <button type="submit" class="login">Login</button>
-                    </div>
-                </div>
-            </form>
-            <div>
-                Don't have an account yet?
-                <button class="sign-up" on:click={handleRegisterClick}>Sign Up</button>
+      <div class="container-3">
+        <img src="/a_1.png" alt="Logo" class="logo">
+        <div class="halaman-login-1">Login</div>
+        <form on:submit|preventDefault={handleSubmit}>
+          <div class="form-group">
+            <label for="email" class="email">Email</label>
+            <div class="rectangle-9">
+              <input type="email" id="email" bind:value={email} class="input-field" />
             </div>
+          </div>
+          <div class="form-group">
+            <label for="password" class="password">Password</label>
+            <div class="rectangle-10">
+              <input type="password" id="password" bind:value={password} class="input-field" />
+            </div>
+          </div>
+          {#if errorMessage}
+            <p class="error">{errorMessage}</p>
+          {/if}
+          {#if successMessage}
+            <p class="success">{successMessage}</p>
+          {/if}
+          <div class="container">
+            <div class="container-1">
+              {#if isLoading}
+                <div class="spinner"></div> <!-- Tampilkan spinner saat isLoading true -->
+              {:else}
+                <button type="submit" class="login">Login</button> <!-- Tampilkan tombol Login saat isLoading false -->
+              {/if}
+            </div>
+          </div>
+        </form>
+        <div>
+          Don't have an account yet?
+          <button class="sign-up" on:click={handleRegisterClick}>Sign Up</button>
         </div>
+      </div>
     </div>
-</div>
+  </div>  
