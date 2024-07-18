@@ -5,11 +5,11 @@
 
 <div class="content">
     <div class="image-container">
-        <img src="/AI.png" alt="Logo" />
+        <img src="/presentation (2).png" alt="Logo" />
     </div>
     <div class="text-container">
         <h1>Power Point Maker</h1>
-        <p>Di PPT Maker, kami bertujuan untuk merevolusi cara Anda membuat presentasi <br> dengan memanfaatkan teknologi AI tercanggih.</p>
+        <p>Welcome to PPT Maker – your AI-powered solution for creating stunning PowerPoint presentations effortlessly.<br> Turn your ideas into professional slides in minutes, and let our AI handle the rest!</p>
     </div>
 </div>
 
@@ -21,7 +21,7 @@
         align-items: center;
         height: calc(100vh - 70px); /* Adjust according to your navigation bar height */
         padding: 20px;
-        background: linear-gradient(to left, #FFF5E0, #FF6969);
+        background-color: #FAEED1;
     }
     .image-container {
         flex: 1;

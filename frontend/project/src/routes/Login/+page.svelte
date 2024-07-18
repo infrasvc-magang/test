@@ -62,11 +62,13 @@
     .rectangle-8 {
         border-radius: 20px;
         background: #ECECEC;
-        padding: 40px;
+        padding: 25px;
         width: 400px;
         display: flex;
         flex-direction: column;
         align-items: center;
+        background-color: #FDF7E4;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .container-3 {
@@ -101,11 +103,12 @@
 
     .rectangle-9, .rectangle-10 {
         border-radius: 5px;
-        background: #758694; /* Warna sesuai dengan gambar */
+        background: #ffffff; /* Warna sesuai dengan gambar */
         margin-bottom: 15px;
         width: 100%;
         display: flex;
         align-items: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .input-field {
@@ -115,7 +118,7 @@
         border-radius: 5px;
         background: transparent;
         font-size: 16px;
-        color: #FFFFFF;
+        color: #000000;
     }
 
     .error {
@@ -137,12 +140,17 @@
 
     .container-1{
         border-radius: 5px;
-        background: #009FBD;
+        background: #0078A0;
         width: 45%;
         height: 40px;
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    .container-1:hover{
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
 
     .login{
@@ -181,7 +189,7 @@
     <div class="rectangle-8">
         <div class="container-3">
             <img src="/a_1.png" alt="Logo" class="logo">
-            <div class="halaman-login-1">Halaman Login</div>
+            <div class="halaman-login-1">Login</div>
             <form on:submit|preventDefault={handleSubmit}>
                 <div class="form-group">
                     <label for="email" class="email">Email</label>
