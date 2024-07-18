@@ -42,6 +42,9 @@
             errorMessage = 'Login gagal, silakan coba lagi';
         }
     }
+    function handleRegisterClick(){
+    window.location.href='/Register';
+  }
 </script>
 <NavigationBar/>
 <style>
@@ -157,6 +160,21 @@
         padding: 0; /* Hilangkan padding */
         cursor: pointer; /* Ubah cursor menjadi pointer untuk menandakan bisa diklik */
     }
+    .sign-up{
+        margin-top: 10px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        color: #000000;
+        text-align: center;
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        text-decoration: underline;
+    }
+    .sign-up:hover{
+        color: #0078A0;
+    }
 </style>
 
 <div class="halaman-login">
@@ -189,6 +207,10 @@
                     </div>
                 </div>
             </form>
+            <div>
+                Don't have an account yet?
+                <button class="sign-up" on:click={handleRegisterClick}>Sign Up</button>
+            </div>
         </div>
     </div>
 </div>

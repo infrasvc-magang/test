@@ -27,9 +27,6 @@
   function handleAboutClick(){
     window.location.href='/About';
   }
-  function handleRegisterClick(){
-    window.location.href='/Register';
-  }
 </script>
 
 <Navbar style="background-color: #F695C;" light expand="md" container="md">
@@ -44,26 +41,20 @@
         <NavLink on:click={handleHomeClick} style="color: white;">Home</NavLink>
       </NavItem>
       <NavItem>
-        <NavLink on:click={handleAboutClick} style="color: white;">About</NavLink>
+        <NavLink on:click={handleAboutClick} style="color: white; margin-left : 3rem">About</NavLink>
       </NavItem>
-      <Dropdown nav inNavbar>
-        <DropdownToggle nav caret style="color: white;">Menu</DropdownToggle>
-        <DropdownMenu end>
-          <DropdownItem on:click={handleLoginClick}>Login</DropdownItem>
-          <DropdownItem on:click={handleRegisterClick}>Register</DropdownItem>
-          <DropdownItem divider />
-          <DropdownItem>Logout</DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
+      <NavItem>
+        <NavLink on:click={handleLoginClick} style="color: white; margin-left : 3rem">Login</NavLink>
+      </NavItem>
     </Nav>
   </Collapse>
 </Navbar>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
   
   :global(.navbar, .navbar-brand, .nav-link, .dropdown-item) {
-      font-family: 'Oswald';
+      font-family: 'Poppins';
   }
 
   :global(.navbar) {
