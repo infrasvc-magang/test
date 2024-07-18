@@ -25,18 +25,30 @@ with app.app_context():
 
 @app.route('/')
 def index():
-
     history = PresentationHistory.query.order_by(PresentationHistory.created_at.desc()).all()
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         return render_template('history_table.html', history=history)
     return render_template('index.html', history=history)
+
 @app.route('/generate', methods=['POST'])
 def generate():
     request_data = request.get_json()
     presentation_title = request_data.get('title')
+    action = request_data.get('action')  # Added to get the action
 
     if not presentation_title:
         return jsonify({"error": "Title is required"}), 400
+
+    existing_presentation = PresentationHistory.query.filter_by(title=presentation_title).first()
+    if existing_presentation and not action:
+        return jsonify({
+            "message": "Presentasi ini sudah pernah dibuat sebelumnya, apa anda tetap ingin membuatnya?",
+            "exists": True
+        }), 200
+
+    if action == 'update' and existing_presentation:
+        db.session.delete(existing_presentation)
+        db.session.commit()
 
     query_json = json.dumps({
         "input text": "[[QUERY]]",
@@ -140,7 +152,6 @@ def search():
     search_query = request.args.get('query', '')
     history = PresentationHistory.query.filter(PresentationHistory.title.ilike(f'%{search_query}%')).order_by(PresentationHistory.created_at.desc()).all()
     return render_template('history_table.html', history=history)
-
 
 @app.route('/download/<path:filename>', methods=['GET'])
 def download_file(filename):

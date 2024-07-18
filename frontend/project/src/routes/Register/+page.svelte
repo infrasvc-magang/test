@@ -55,7 +55,7 @@ try {
 
 
     .page-wrapper {
-        background: #009FBD; /* Background biru */
+        background: #FAEED1; /* Background biru */
         min-height: 100vh;
         display: flex;
         flex-direction: column;
