@@ -73,4 +73,8 @@
       background-color: #973131 !important;
       color: white !important;
   }
+  
+  :global(.nav-link:hover) {
+    background-color: #561C24;
+  }
 </style>
