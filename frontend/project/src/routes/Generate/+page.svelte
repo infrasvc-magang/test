@@ -11,15 +11,19 @@
 </script>
 
 <style>
-  body {
-    background-color: #FAEED1; /* Warna background yang diinginkan */
+  :global(html, body) {
+    height: 100%;
+    margin: 0;
+    background-color: #FAEED1; 
+    font-family: 'Poppins', sans-serif; /* Menggunakan font Poppins */
   }
   .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif; /* Menggunakan font Poppins */
+    min-height: 100vh;
   }
   .results {
     background-color: #ffffff;
@@ -49,7 +53,7 @@
     width: 80%;
     border-collapse: collapse;
     margin-top: 20px;
-    text-align: left;
+    text-align: center;
   }
   .history-table th, .history-table td {
     border: 1px solid #ddd;
@@ -74,7 +78,6 @@
     </div>
     <Button color="warning">Download PPT</Button>
   </div>
-
   <table class="history-table">
     <thead>
       <tr>
