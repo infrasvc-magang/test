@@ -51,25 +51,25 @@
   }
 
   .loader {
-    display: inline-flex;
-    gap: 10px;
-  }
-  .loader:before,
-  .loader:after {
-    content: "";
-    height: 20px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: radial-gradient(farthest-side, #000 95%, #0000) 50%/8px 8px no-repeat #ff0000;
-    animation: l10 1.5s infinite alternate;
-  }
-  .loader:after {
-    --s: -1;
-  }
-  @keyframes l10 {
-    0%, 20% { transform: scaleX(var(--s, 1)) rotate(0deg); clip-path: inset(0); }
-    60%, 100% { transform: scaleX(var(--s, 1)) rotate(30deg); clip-path: inset(40% 0 0); }
-  }
+  width: 120px;
+  height: 22px;
+  border-radius: 20px;
+  color: #514b82;
+  border: 2px solid;
+  position: relative;
+}
+.loader::before {
+  content: "";
+  position: absolute;
+  margin: 2px;
+  inset: 0 100% 0 0;
+  border-radius: inherit;
+  background: currentColor;
+  animation: l6 2s infinite;
+}
+@keyframes l6 {
+    100% {inset:0}
+}
 </style>
 
 <div class="centered-form">
