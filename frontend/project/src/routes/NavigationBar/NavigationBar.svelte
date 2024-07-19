@@ -12,8 +12,16 @@
     DropdownMenu,
     DropdownItem
   } from '@sveltestrap/sveltestrap';
+  import { getCookie, deleteCookie } from "svelte-cookie";
+  import { onMount } from "svelte";
 
   let isOpen = false;
+  let isAuthenticated = false;
+
+  onMount(() => {
+    const token = getCookie('token');
+    isAuthenticated = !!token;
+  });
 
   function handleUpdate(event) {
     isOpen = event.detail.isOpen;
@@ -21,11 +29,18 @@
   function handleLoginClick(){
     window.location.href='/Login';
   }
-  function handleHomeClick(){
+  function handleDashboardClick(){
     window.location.href='/dashboard';
   }
   function handleAboutClick(){
     window.location.href='/About';
+  }
+  function handleLogoutClick(){
+    deleteCookie('token', { path: '/'});
+    window.location.href="/";
+  }
+  function handleHomeClick(){
+    window.location.href="/";
   }
 </script>
 
@@ -41,11 +56,20 @@
         <NavLink on:click={handleHomeClick} style="color: white;">Home</NavLink>
       </NavItem>
       <NavItem>
+        <NavLink on:click={handleDashboardClick} style="color: white; margin-left : 3rem">Dashboard</NavLink>
+      </NavItem>
+      <NavItem>
         <NavLink on:click={handleAboutClick} style="color: white; margin-left : 3rem">About</NavLink>
       </NavItem>
+      {#if isAuthenticated}
+      <NavItem>
+        <NavLink on:click={handleLogoutClick} style="color: white; margin-left : 3rem">Logout</NavLink>
+      </NavItem>
+      {:else}
       <NavItem>
         <NavLink on:click={handleLoginClick} style="color: white; margin-left : 3rem">Login</NavLink>
       </NavItem>
+      {/if}
     </Nav>
   </Collapse>
 </Navbar>

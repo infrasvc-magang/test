@@ -17,6 +17,7 @@
     } else {
       console.log('Token tidak ditemukan');
       isAuthenticated = false;
+      window.location.href='/Login';
     }
   });
 
@@ -72,6 +73,7 @@
 }
 </style>
 
+{#if isAuthenticated}
 <div class="centered-form">
   <Container>
     <Row>
@@ -97,3 +99,6 @@
     </Row>
   </Container>
 </div>
+{:else}
+<p>Redirecting to login...</p>
+{/if}

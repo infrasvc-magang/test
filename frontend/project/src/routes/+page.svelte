@@ -1,5 +1,21 @@
-<script>
+<script lang="ts">
     import NavigationBar from "./NavigationBar/NavigationBar.svelte";
+    import { getCookie } from "svelte-cookie";
+    import { onMount } from "svelte";
+
+    let isAuthenticated = false;
+
+    onMount(() => {
+        const token = getCookie('token');
+        isAuthenticated = !!token;
+    });
+    function handleHomeClick(){
+        if (isAuthenticated) {
+            window.location.href = '/dashboard';
+        } else {
+            window.location.href = '/Login';
+        }
+    }
 </script>
 <NavigationBar/>
 
@@ -10,6 +26,7 @@
     <div class="text-container">
         <h1>Power Point Maker</h1>
         <p>Welcome to PPT Maker – your AI-powered solution for creating stunning PowerPoint presentations effortlessly.<br> Turn your ideas into professional slides in minutes, and let our AI handle the rest!</p>
+        <button on:click={handleHomeClick}>Get Started</button>
     </div>
 </div>
 
@@ -48,5 +65,18 @@
     }
     .text-container p {
         font-size: 1rem;
+    }
+    button {
+        background-color: #973131;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 20px;
+        font-family: 'Caveat Brush', sans-serif;
+    }
+    button:hover{
+        background-color: #561C24;
     }
 </style>
