@@ -53,7 +53,7 @@
   <Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
     <Nav class="ms-auto" navbar>
       <NavItem>
-        <NavLink on:click={handleHomeClick} style="color: white;">Home</NavLink>
+        <NavLink on:click={handleHomeClick} style="color: white; margin-left : 3rem">Home</NavLink>
       </NavItem>
       <NavItem>
         <NavLink on:click={handleDashboardClick} style="color: white; margin-left : 3rem">Dashboard</NavLink>
