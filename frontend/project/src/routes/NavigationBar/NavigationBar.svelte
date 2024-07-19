@@ -22,7 +22,7 @@
     window.location.href='/Login';
   }
   function handleHomeClick(){
-    window.location.href='/';
+    window.location.href='/dashboard';
   }
   function handleAboutClick(){
     window.location.href='/About';
