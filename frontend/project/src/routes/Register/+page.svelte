@@ -12,14 +12,14 @@
         event.preventDefault();
 
 // Validasi sederhana (misalnya, pastikan semua input terisi)
-if (!username || !email || !password) {
+if (!email || !password) {
     errorMessage = 'Harap lengkapi semua kolom.';
     return;
 }
 
 // Lakukan request POST ke server (ganti URL dengan URL registrasi Anda)
 const url = 'https://um.infrasvc.id/v2/login'; // Ganti dengan URL yang sesuai
-const data = { username, email, password };
+const data = {email, password };
 
 try {
     const response = await fetch('https://um.infrasvc.id/v2/login', {
@@ -35,7 +35,6 @@ try {
     }
 
     // Reset form dan tampilkan pesan sukses
-    username = '';
     email = '';
     password = '';
     successMessage = 'Registrasi berhasil! Silakan login dengan akun baru Anda.';
@@ -72,13 +71,14 @@ try {
 
     .rectangle-8 {
         border-radius: 20px;
-        background: #ECECEC;
+        background-color: #FDF7E4;
         padding: 40px;
         width: 100%;
         max-width: 400px;
         display: flex;
         flex-direction: column;
         align-items: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .container-3 {
@@ -88,9 +88,9 @@ try {
     }
 
     .logo {
-        width: 100px;
-        height: auto;
-        margin: 20px;
+        width: 150px;  /* Ubah nilai ini untuk menyesuaikan ukuran lebar logo */
+        height: auto;  /* Menjaga aspek rasio logo */
+        margin: 30px;
     }
 
     .halaman-register-1 {
@@ -113,21 +113,22 @@ try {
 
     .rectangle-input {
         border-radius: 5px;
-        background: #BF7D56;
+        background: #FFFFFF;
         margin-bottom: 10px;
         width: 100%;
         display: flex;
         align-items: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .input-field {
-        width: 100%;
-        padding: 8px;
+       width: 100%;
+        padding: 5px;
         border: none;
         border-radius: 5px;
         background: transparent;
-        font-size: 14px;
-        color: #FFFFFF;
+        font-size: 16px;
+        color: #000000;
     }
 
     .error {
@@ -157,6 +158,11 @@ try {
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    .container-1:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
 
     .register-button {
@@ -212,14 +218,8 @@ try {
         <div class="rectangle-8">
             <div class="container-3">
                 <img src="/a_1.png" alt="Logo" class="logo">
-                <div class="halaman-register-1">Halaman Register</div>
+                <div class="halaman-register-1">Register</div>
                 <form on:submit|preventDefault={handleSubmit}>
-                    <div class="form-group">
-                        <label for="username" class="form-label">Username</label>
-                        <div class="rectangle-input">
-                            <input type="text" id="username" bind:value={username} class="input-field" />
-                        </div>
-                    </div>
                     <div class="form-group">
                         <label for="email" class="form-label">Email</label>
                         <div class="rectangle-input">
