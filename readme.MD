@@ -4,12 +4,14 @@
 
 Notes: yang penting fungsinya sudah ada, nanti ketika frontend dan backend sudah dideploy ke server produksi tinggal alamat backend pada fetch diganti.
 
+**Fitur delete nya masih error, masih coba diperbaiki**
+
 ## How to Use:
 
 
 ### 1. Requirements.
 
-#### Requirements Backend.
+#### 1.1. Requirements Backend.
 install python: https://www.python.org/downloads/
 install pip: `python get-pip.py`
 install beberapa library yg diperlukan:
@@ -21,7 +23,7 @@ pip install flask_sqlalchemy
 pip install flask-cors
 ```
 
-#### Requirements Frontend.
+#### 1.2. Requirements Frontend.
 install node js dan npm: https://nodejs.org/en/download/package-manager
 
 
