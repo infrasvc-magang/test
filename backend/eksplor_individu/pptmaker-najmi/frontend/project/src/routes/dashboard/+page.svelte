@@ -3,42 +3,38 @@
   import { Button, Form, FormGroup, Input, Container, Row, Col } from '@sveltestrap/sveltestrap';
   import { getCookie } from 'svelte-cookie';
   import { onMount } from 'svelte';
-
   let isAuthenticated = false;
   let validated = false;
   let inputText = '';
   let isLoading = false;
-
+  let userEmail = '';
   onMount(() => {
     const token = getCookie('token');
     if (token) {
       console.log('Token ada:', token);
       isAuthenticated = true;
+      userEmail = getCookie('email'); // Assuming you store the user's email in a cookie
     } else {
       console.log('Token tidak ditemukan');
       isAuthenticated = false;
     }
   });
-
   async function handleGenerateClick() {
     isLoading = true;
-
     try {
       const response = await fetch('http://127.0.0.1:5000/generate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ title: inputText })
+        body: JSON.stringify({ title: inputText, email: userEmail })
       });
-
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-
       const data = await response.json();
       sessionStorage.setItem('generateResult', JSON.stringify(data));
-      window.location.href = '/Generate'; // Ubah ke URL halaman hasil
+      window.location.href = '/Generate';
     } catch (error) {
       console.error('Error:', error);
     } finally {
@@ -46,9 +42,7 @@
     }
   }
 </script>
-
 <NavigationBar/>
-
 <style>
   .centered-form {
     display: flex;
@@ -59,7 +53,6 @@
     background-color: #FAEED1;
     color: #000000;
   }
-
   .button-wrapper {
     display: flex;
     justify-content: center;
@@ -68,7 +61,6 @@
     max-width: 500px;
     margin-top: 1.5rem;
   }
-
   .loader {
     display: inline-flex;
     gap: 10px;
@@ -90,7 +82,6 @@
     60%, 100% { transform: scaleX(var(--s, 1)) rotate(30deg); clip-path: inset(40% 0 0); }
   }
 </style>
-
 <div class="centered-form">
   <Container>
     <Row>

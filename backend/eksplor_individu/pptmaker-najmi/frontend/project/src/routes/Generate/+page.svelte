@@ -2,36 +2,22 @@
   import { onMount } from 'svelte';
   import { Button } from '@sveltestrap/sveltestrap';
   import NavigationBar from "../NavigationBar/NavigationBar.svelte";
-
   let generateResult = {
     title: '',
     download_link: '',
     created_at: ''
   };
-
-  let history = [];
-
   onMount(() => {
     const result = sessionStorage.getItem('generateResult');
     if (result) {
       const parsedResult = JSON.parse(result);
       generateResult = parsedResult;
-      history.push(parsedResult);
-      // Simpan riwayat ke sessionStorage untuk menjaga persistensi data
-      sessionStorage.setItem('history', JSON.stringify(history));
-    }
-
-    const storedHistory = sessionStorage.getItem('history');
-    if (storedHistory) {
-      history = JSON.parse(storedHistory);
     }
   });
-
   function downloadFile(link) {
     window.location.href = link;
   }
 </script>
-
 <style>
   :global(html, body) {
     height: 100%;
@@ -70,27 +56,8 @@
     margin: 20px 0;
     font-size: 1rem;
   }
-  .history-table {
-    width: 80%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    text-align: center;
-  }
-  .history-table th, .history-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  .history-table th {
-    background-color: #d4a053;
-    color: white;
-  }
-  .history-table td {
-    background-color: #ffffff;
-  }
 </style>
-
 <NavigationBar/>
-
 <div class="container">
   <div class="results">
     <h2>Your Generate Results</h2>
@@ -98,27 +65,10 @@
       <div class="topic-box">
         <strong>Topic:</strong> {generateResult.title}
       </div>
-      <Button color="warning" on:click={() => downloadFile(generateResult.download_link)}>Download PPT</Button>
-    {:else}
-      <p>No result available.</p>
+      <p>PPT berhasil ditambahkan ke history. <a href="/history">Lihat History</a></p>
+      <Button color="warning" on:click={() => downloadFile(generateResult.download_link)}>
+        Download File
+      </Button>
     {/if}
   </div>
-  <table class="history-table">
-    <thead>
-      <tr>
-        <th>History</th>
-        <th>Download</th>
-        <th>Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      {#each history as item}
-        <tr>
-          <td>{item.title}</td>
-          <td><Button color="primary" on:click={() => downloadFile(item.download_link)}>Download</Button></td>
-          <td>{new Date(item.created_at).toLocaleString()}</td>
-        </tr>
-      {/each}
-    </tbody>
-  </table>
 </div>
