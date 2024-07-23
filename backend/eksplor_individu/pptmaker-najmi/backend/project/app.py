@@ -17,6 +17,7 @@ CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///presentations.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
 openai.api_key = "YOUR_API_KEY"
 
 class PresentationHistory(db.Model):

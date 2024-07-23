@@ -9,11 +9,13 @@
   let inputText = '';
   let isLoading = false;
   let showGif = true;
+  let userEmail = '';
 
   onMount(() => {
     const token = getCookie('token');
     if (token) {
       isAuthenticated = true;
+      userEmail = getCookie('email'); // Assuming you store the user's email in a cookie
       showGif = false; // Hide GIF immediately if authenticated
     } else {
       setTimeout(() => {
@@ -37,11 +39,27 @@
     }
   });
 
-  function handleGenerateClick() {
+  async function handleGenerateClick() {
     isLoading = true;
-    sessionStorage.setItem('inputText', inputText);
-    window.location.href = '/Generate'; // Ubah ke URL halaman hasil
-    isLoading = false;
+    try {
+      const response = await fetch('http://127.0.0.1:5000/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title: inputText, email: userEmail })
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      sessionStorage.setItem('generateResult', JSON.stringify(data));
+      window.location.href = '/Generate';
+    } catch (error) {
+      console.error('Error:', error);
+    } finally {
+      isLoading = false;
+    }
   }
 </script>
 
