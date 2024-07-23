@@ -104,8 +104,8 @@
 {#if showGif}
   <div class="centered-form">
     <img src="/markk.gif" alt="Not logged in" class="centered-mark" />
-    <h3>Anda belum login</h3>
-    <p>Silahkan login terlebih dahulu.</p>
+    <h3>You are not logged in!</h3>
+    <p>Please login first</p>
   </div>
 {:else}
   {#if isAuthenticated}
@@ -137,8 +137,8 @@
   {:else}
     <div class="centered-form">
       <img src="/markk.gif" alt="Not logged in" class="centered-mark" />
-      <h3>Anda belum login</h3>
-      <p>Silahkan login terlebih dahulu.</p>
+      <h3>You are not logged in!</h3>
+      <p>Please login first</p>
     </div>
   {/if}
 {/if}
