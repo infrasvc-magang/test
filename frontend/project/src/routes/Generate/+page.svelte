@@ -1,15 +1,23 @@
-<script lang="ts">
+<script>
   import { onMount } from 'svelte';
   import { Button } from '@sveltestrap/sveltestrap';
   import NavigationBar from "../NavigationBar/NavigationBar.svelte";
-
-  let inputText = '';
-
+  let generateResult = {
+    title: '',
+    download_link: '',
+    created_at: ''
+  };
   onMount(() => {
-    inputText = sessionStorage.getItem('inputText') || '';
+    const result = sessionStorage.getItem('generateResult');
+    if (result) {
+      const parsedResult = JSON.parse(result);
+      generateResult = parsedResult;
+    }
   });
+  function downloadFile(link) {
+    window.location.href = link;
+  }
 </script>
-
 <style>
   :global(html, body) {
     height: 100%;
@@ -48,55 +56,19 @@
     margin: 20px 0;
     font-size: 1rem;
   }
-  .history-table {
-    width: 80%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    text-align: center;
-  }
-  .history-table th, .history-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  .history-table th {
-    background-color: #d4a053;
-    color: white;
-  }
-  .history-table td {
-    background-color: #ffffff;
-  }
 </style>
-
 <NavigationBar/>
-
 <div class="container">
   <div class="results">
     <h2>Your Generate Results</h2>
-    <div class="topic-box">
-      <strong>Topic:</strong> {inputText}
-    </div>
-    <Button color="warning">Download PPT</Button>
+    {#if generateResult.title}
+      <div class="topic-box">
+        <strong>Topic:</strong> {generateResult.title}
+      </div>
+      <p>PPT berhasil ditambahkan ke history. <a href="/history">Lihat History</a></p>
+      <Button color="warning" on:click={() => downloadFile(generateResult.download_link)}>
+        Download File
+      </Button>
+    {/if}
   </div>
-  <table class="history-table">
-    <thead>
-      <tr>
-        <th>History</th>
-        <th>Download</th>
-        <th>Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Add rows here -->
-      <tr>
-        <td>Example History 1</td>
-        <td><Button color="primary">Download</Button></td>
-        <td>2024-07-18</td>
-      </tr>
-      <tr>
-        <td>Example History 2</td>
-        <td><Button color="primary">Download</Button></td>
-        <td>2024-07-17</td>
-      </tr>
-    </tbody>
-  </table>
 </div>
