@@ -3,11 +3,13 @@
   import { Button, Form, FormGroup, Input, Container, Row, Col } from '@sveltestrap/sveltestrap';
   import { getCookie } from 'svelte-cookie';
   import { onMount } from 'svelte';
+
   let isAuthenticated = false;
   let validated = false;
   let inputText = '';
   let isLoading = false;
   let userEmail = '';
+
   onMount(() => {
     const token = getCookie('token');
     if (token) {
@@ -19,6 +21,7 @@
       isAuthenticated = false;
     }
   });
+
   async function handleGenerateClick() {
     isLoading = true;
     try {
@@ -82,6 +85,7 @@
     60%, 100% { transform: scaleX(var(--s, 1)) rotate(30deg); clip-path: inset(40% 0 0); }
   }
 </style>
+
 <div class="centered-form">
   <Container>
     <Row>
