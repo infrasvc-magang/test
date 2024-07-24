@@ -4,7 +4,6 @@
 
 Notes: yang penting fungsinya sudah ada, nanti ketika frontend dan backend sudah dideploy ke server produksi tinggal alamat backend pada fetch diganti.
 
-**Fitur delete nya masih error, masih coba diperbaiki**
 
 ## How to Use:
 

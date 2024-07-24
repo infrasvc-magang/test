@@ -104,6 +104,7 @@
       <thead>
         <tr>
           <th>Title</th>
+          <th>ID</th>
           <th>Created At</th>
           <th>Download Link</th>
           <th>Action</th>
@@ -113,6 +114,7 @@
         {#each history as item}
           <tr>
             <td>{item.title}</td>
+            <td>{item.id}</td>
             <td>{new Date(item.created_at).toLocaleString()}</td>
             <td><a href={item.download_link}>Download</a></td>
             <td><button class="delete-button" on:click={() => deleteHistory(item.id)}>Delete</button></td>
