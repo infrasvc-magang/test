@@ -21,7 +21,7 @@ openai.api_key = "YOUR_API_KEY"
 class PresentationHistory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=datetime.now(local_tz))
     download_link = db.Column(db.String(200), nullable=False)
     user_email = db.Column(db.String(120), nullable=False)
 

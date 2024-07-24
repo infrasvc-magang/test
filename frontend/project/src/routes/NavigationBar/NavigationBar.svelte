@@ -42,6 +42,9 @@
   function handleHomeClick(){
     window.location.href="/";
   }
+  function handleHistoryClick(){
+    window.location.href="/history";
+  }
 </script>
 
 <Navbar style="background-color: #F695C;" light expand="md" container="md">
@@ -60,6 +63,9 @@
       </NavItem>
       <NavItem>
         <NavLink on:click={handleAboutClick} style="color: white; margin-left : 3rem">About</NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink on:click={handleHistoryClick} style="color: white; margin-left : 3rem">History</NavLink>
       </NavItem>
       {#if isAuthenticated}
       <NavItem>
@@ -80,19 +86,15 @@
   :global(.navbar, .navbar-brand, .nav-link, .dropdown-item) {
       font-family: 'Poppins';
   }
-
   :global(.navbar) {
       background-color: #BBAB8C !important;
   }
-
   :global(.navbar-brand, .nav-link, .dropdown-toggle) {
       color: white !important;
   }
-
   :global(.dropdown-item) {
       color: #973131 !important;
   }
-
   :global(.dropdown-item:hover) {
       background-color: #973131 !important;
       color: white !important;
