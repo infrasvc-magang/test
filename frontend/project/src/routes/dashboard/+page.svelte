@@ -15,27 +15,15 @@
     const token = getCookie('token');
     if (token) {
       isAuthenticated = true;
+      console.log('Token ada:', token);
       userEmail = getCookie('email'); // Assuming you store the user's email in a cookie
-      showGif = false; // Hide GIF immediately if authenticated
     } else {
+      console.log('Token tidak ditemukan');
+      isAuthenticated = false;
       setTimeout(() => {
         showGif = false;
         window.location.href = '/Login'; // Redirect to login after 5 seconds
       }, 1000); // 5000 milliseconds = 5 seconds
-    }
-  });
-
-  onMount(() => {
-    const token = getCookie('token');
-    if (token) {
-      console.log('Token ada:', token);
-      isAuthenticated = true;
-    } else {
-      console.log('Token tidak ditemukan');
-      isAuthenticated = false;
-      if (!showGif) {
-        window.location.href = '/Login';
-      }
     }
   });
 
@@ -119,13 +107,6 @@
   }
 </style>
 
-{#if showGif}
-  <div class="centered-form">
-    <img src="/markk.gif" alt="Not logged in" class="centered-mark" />
-    <h3>You are not logged in!</h3>
-    <p>Please login first</p>
-  </div>
-{:else}
   {#if isAuthenticated}
     <div class="centered-form">
       <Container>
@@ -159,4 +140,3 @@
       <p>Please login first</p>
     </div>
   {/if}
-{/if}
