@@ -1,20 +1,9 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
-    import { getCookie } from 'svelte-cookie';
     import NavigationBar from "../NavigationBar/NavigationBar.svelte";
     let history = [];
     let isAuthenticated = false;
     let userEmail = '';
-    onMount(async () => {
-      const token = getCookie('token');
-      if (token) {
-        isAuthenticated = true;
-        userEmail = getCookie('email'); // Assuming you store the user's email in a cookie
-        await fetchHistory();
-      } else {
-        isAuthenticated = false;
-      }
-    });
+  
     async function fetchHistory() {
       try {
         const response = await fetch(`http://127.0.0.1:5000/history?email=${userEmail}`);
