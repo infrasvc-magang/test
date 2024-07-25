@@ -9,7 +9,7 @@ from datetime import datetime
 from flask_cors import CORS
 import pytz
 
-# Set zona waktu lokal (contoh: Asia/Jakarta)
+# Set zona waktu lokal
 local_tz = pytz.timezone('Asia/Jakarta')
 app = Flask(__name__)
 CORS(app)
@@ -21,9 +21,12 @@ openai.api_key = "YOUR_API_KEY"
 class PresentationHistory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.now(local_tz))
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)  # Store in UTC
     download_link = db.Column(db.String(200), nullable=False)
     user_email = db.Column(db.String(120), nullable=False)
+
+    def get_local_created_at(self):
+        return self.created_at.astimezone(local_tz)  # Convert to local time
 
 with app.app_context():
     db.create_all()
@@ -36,7 +39,7 @@ def index():
             {
                 "id": entry.id,
                 "title": entry.title,
-                "created_at": entry.created_at.isoformat(),
+                "created_at": entry.get_local_created_at().isoformat(),  # Convert to local time
                 "download_link": entry.download_link
             } for entry in history
         ]})
@@ -52,7 +55,7 @@ def generate():
 
     existing_presentation = PresentationHistory.query.filter_by(title=presentation_title, user_email=user_email).first()
     if existing_presentation:
-        return jsonify({"message": "Presentation already exists"}), 200
+        return jsonify({"message": "Presentation already exists", "exists": True}), 200
 
     query_json = json.dumps({
         "input text": "[[QUERY]]",
@@ -132,7 +135,7 @@ def generate():
     return jsonify({
         "id": new_presentation.id,
         "title": presentation_title,
-        "created_at": new_presentation.created_at.astimezone(local_tz).isoformat(),
+        "created_at": new_presentation.get_local_created_at().isoformat(),
         "download_link": download_link
     }), 200
 
@@ -145,7 +148,7 @@ def get_history():
             {
                 "id": entry.id,
                 "title": entry.title,
-                "created_at": entry.created_at.isoformat(),
+                "created_at": entry.get_local_created_at().isoformat(),
                 "download_link": entry.download_link
             } for entry in history
         ]
