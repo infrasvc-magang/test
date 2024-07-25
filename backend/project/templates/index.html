@@ -105,12 +105,12 @@
             duplicatePopup.style.display = 'none';
         }
 
-        function createAgain() {
+        function createAgain(event) {
             hideDuplicatePopup();
             submitForm(event, 'create');
         }
 
-        function updatePresentation() {
+        function updatePresentation(event) {
             hideDuplicatePopup();
             submitForm(event, 'update');
         }
@@ -193,8 +193,8 @@
     <div id="duplicate-popup">
         <div id="duplicate-popup-content">
             <span id="duplicate-message"></span><br>
-            <button onclick="createAgain()">Buat lagi</button>
-            <button onclick="updatePresentation()">Update</button>
+            <button onclick="createAgain(event)">Buat lagi</button>
+            <button onclick="updatePresentation(event)">Update</button>
         </div>
     </div>
 </body>

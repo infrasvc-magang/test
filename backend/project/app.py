@@ -9,7 +9,7 @@ from datetime import datetime
 from flask_cors import CORS
 import pytz
 
-# Set zona waktu lokal
+# Set zona waktu lokal (contoh: Asia/Jakarta)
 local_tz = pytz.timezone('Asia/Jakarta')
 app = Flask(__name__)
 CORS(app)
@@ -21,12 +21,12 @@ openai.api_key = "YOUR_API_KEY"
 class PresentationHistory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)  # Store in UTC
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)  # Simpan waktu dalam UTC
     download_link = db.Column(db.String(200), nullable=False)
     user_email = db.Column(db.String(120), nullable=False)
 
     def get_local_created_at(self):
-        return self.created_at.astimezone(local_tz)  # Convert to local time
+        return self.created_at.replace(tzinfo=pytz.utc).astimezone(local_tz)
 
 with app.app_context():
     db.create_all()
@@ -34,13 +34,16 @@ with app.app_context():
 @app.route('/')
 def index():
     history = PresentationHistory.query.order_by(PresentationHistory.created_at.desc()).all()
+    for entry in history:
+        entry.created_at = entry.get_local_created_at()  # Konversi waktu ke zona waktu lokal
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest' or request.is_json:
         return jsonify({"history": [
             {
                 "id": entry.id,
                 "title": entry.title,
-                "created_at": entry.get_local_created_at().isoformat(),  # Convert to local time
-                "download_link": entry.download_link
+                "created_at": entry.created_at.isoformat(),
+                "download_link": entry.download_link,
+                "user_email": entry.user_email
             } for entry in history
         ]})
     return render_template('index.html', history=history)
@@ -55,7 +58,7 @@ def generate():
 
     existing_presentation = PresentationHistory.query.filter_by(title=presentation_title, user_email=user_email).first()
     if existing_presentation:
-        return jsonify({"message": "Presentation already exists", "exists": True}), 200
+        return jsonify({"message": "Presentation already exists"}), 200
 
     query_json = json.dumps({
         "input text": "[[QUERY]]",
@@ -127,29 +130,36 @@ def generate():
     new_presentation = PresentationHistory(
         title=presentation_title,
         download_link=download_link,
-        user_email=user_email
+        user_email=user_email,
+        created_at=datetime.utcnow()  # Simpan dalam UTC
     )
     db.session.add(new_presentation)
     db.session.commit()
 
+    local_created_at = new_presentation.get_local_created_at()  # Konversi waktu
+
     return jsonify({
         "id": new_presentation.id,
         "title": presentation_title,
-        "created_at": new_presentation.get_local_created_at().isoformat(),
-        "download_link": download_link
+        "created_at": local_created_at.isoformat(),
+        "download_link": download_link,
+        "user_email": user_email
     }), 200
 
 @app.route('/history', methods=['GET'])
 def get_history():
     user_email = request.args.get('email')
     history = PresentationHistory.query.filter_by(user_email=user_email).order_by(PresentationHistory.created_at.desc()).all()
+    for entry in history:
+        entry.created_at = entry.get_local_created_at()  # Konversi waktu ke zona waktu lokal
     return jsonify({
         "history": [
             {
                 "id": entry.id,
                 "title": entry.title,
-                "created_at": entry.get_local_created_at().isoformat(),
-                "download_link": entry.download_link
+                "created_at": entry.created_at.isoformat(),
+                "download_link": entry.download_link,
+                "user_email": entry.user_email
             } for entry in history
         ]
     })
@@ -181,6 +191,8 @@ def delete(id):
 def search():
     search_query = request.args.get('query', '')
     history = PresentationHistory.query.filter(PresentationHistory.title.ilike(f'%{search_query}%')).order_by(PresentationHistory.created_at.desc()).all()
+    for entry in history:
+        entry.created_at = entry.get_local_created_at()  # Konversi waktu ke zona waktu lokal
     return render_template('history_table.html', history=history)
 
 @app.route('/download/<path:filename>', methods=['GET'])
