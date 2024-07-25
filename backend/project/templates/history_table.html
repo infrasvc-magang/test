@@ -15,7 +15,7 @@
             <td>{{ record.id }}</td>
             <td>{{ record.user_email }}</td>
             <td>{{ record.title }}</td>
-            <td>{{ record.get_local_created_at().strftime('%Y-%m-%d %H:%M:%S') }}</td>
+            <td>{{ record.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
             <td><a href="{{ record.download_link }}" target="_blank">Download</a></td>
             <td><button onclick="deletePresentation({{ record.id }})">Delete</button></td>
         </tr>
