@@ -85,14 +85,14 @@
       border-bottom: 1px solid #dddddd;
     }
     th {
-      background-color: #0044cc;
+      background-color: #C08B5C;
       color: white;
     }
     tr:hover {
       background-color: #f2f2f2;
     }
     .delete-button {
-      background-color: #ff4d4d;
+      background-color: #973131;
       color: white;
       border: none;
       padding: 8px 12px;
