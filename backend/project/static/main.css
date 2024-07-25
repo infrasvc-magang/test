@@ -134,8 +134,7 @@ td button:hover {
 .search-container {
     display: flex;
     justify-content: flex-end;
-    margin: 5px;
-    margin-left: 885px;
+    margin-top: 50px;
 }
 
 .search-container input[type=text] {
