@@ -44,6 +44,7 @@
         async function submitForm(event, action = null) {
             event.preventDefault();
             const title = document.getElementById('title').value;
+            const email = document.getElementById('email').value;
             showLoading();
 
             const response = await fetch('/generate', {
@@ -51,7 +52,7 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ title, action })
+                body: JSON.stringify({ title, email, action })
             });
 
             hideLoading();
@@ -124,15 +125,7 @@
     </script>
 </head>
 <body>
-    <h1>Generate a Presentation</h1>
-    <form onsubmit="submitForm(event)">
-        <label for="title">Presentation Title:</label>
-        <input type="text" id="title" name="title" required>
-        <div class="button-container">
-            <button type="submit">Generate</button>
-            <div id="loading"></div>
-        </div>
-    </form>
+    <h1>PPTMAKER APP ADMIN DASHBOARD</h1>
 
     <div class="search-container">
         <input type="text" id="search" placeholder="Search presentations..." onkeyup="searchPresentations()">
@@ -141,6 +134,8 @@
     <table>
         <thead>
             <tr>
+                <th>ID</th>
+                <th>Email</th>
                 <th>Judul Presentasi</th>
                 <th>Waktu Dibuat</th>
                 <th>Link Download</th>
@@ -150,6 +145,8 @@
         <tbody id="presentation-table">
             {% for record in history %}
             <tr>
+                <td>{{ record.id }}</td>
+                <td>{{ record.user_email }}</td>
                 <td>{{ record.title }}</td>
                 <td>{{ record.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
                 <td><a href="{{ record.download_link }}" target="_blank">Download</a></td>
