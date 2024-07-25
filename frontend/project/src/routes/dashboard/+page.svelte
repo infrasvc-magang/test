@@ -10,26 +10,39 @@
   let isLoading = false;
   let showGif = true;
   let userEmail = '';
+  let message = 'You Are Not Logged In!';
+  let shouldRedirect = false; // Tambahkan variabel ini
 
   onMount(() => {
     const tokenString = getCookie('token');
     console.log('Token saat onMount:', tokenString); // Log tambahan
     if (tokenString) {
       try {
-      const token = JSON.parse(tokenString);
-      isAuthenticated = true;
-      console.log('Token ada:', token);
-      userEmail = getCookie('email'); // Assuming you store the user's email in a cookie
-      console.log('User email:', userEmail);
+        const token = JSON.parse(tokenString);
+        isAuthenticated = true;
+        console.log('Token ada:', token);
+        userEmail = getCookie('email'); // Assuming you store the user's email in a cookie
+        console.log('User email:', userEmail);
       } catch (e) {
         console.error('Error parsing token:', e);
-            isAuthenticated = false;
-        }
+        isAuthenticated = false;
+      }
     } else {
       console.log('Token tidak ditemukan');
       isAuthenticated = false;
+      shouldRedirect = true; // Set this to true to trigger redirect
+    }
+    
+    if (shouldRedirect) {
+      redirectToLogin();
     }
   });
+
+  function redirectToLogin() {
+    setTimeout(() => {
+      window.location.href = '/Login';
+    }, 2000);
+  }
 
   async function handleGenerateClick() {
     isLoading = true;
@@ -58,13 +71,20 @@
 <NavigationBar/>
 
 <style>
-  .centered-mark {
-    display: block;
-    margin: 0 auto;
-    width: 200px; /* Adjust the size as needed */
-    height: auto;
-  }
+  .message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+    flex-direction: column;
+    background-color: #FAEED1;
+    color: #973131;
+    font-size: 2rem; 
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), -2px -2px 4px rgba(255, 255, 255, 0.5); 
 
+  }
   .centered-form {
     display: flex;
     justify-content: center;
@@ -111,36 +131,36 @@
   }
 </style>
 
-  {#if isAuthenticated}
-    <div class="centered-form">
-      <Container>
-        <Row>
-          <Col xs="6" class="d-flex justify-content-center align-items-center" style="width: 50%">
-            <img src="/folder.gif" style="width: 300px" alt="coding" />
-          </Col>
-          <Col xs="6" class="d-flex flex-column justify-content-center align-items-center" style="padding: 50px">
-            <h3>Make Your PowerPoint Now!</h3>
-            <p>Example: Telecommunication Engineering</p>
-            <Form {validated} on:submit={(e) => e.preventDefault()}>
-              <FormGroup>
-                <Input bind:value={inputText} placeholder="Presentation title" style="width: 200px" />
-              </FormGroup>
-              <div class="button-wrapper">
-                {#if isLoading}
-                  <div class="loader"></div>
-                {:else}
-                  <Button class="centered-button" type="submit" on:click={handleGenerateClick}>Generate</Button>
-                {/if}
-              </div>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
-    </div>
-  {:else}
-    <div class="centered-form">
-      <img src="/markk.gif" alt="Not logged in" class="centered-mark" />
-      <h3>You are not logged in!</h3>
-      <p>Please login first</p>
-    </div>
-  {/if}
+{#if isAuthenticated}
+  <div class="centered-form">
+    <Container>
+      <Row>
+        <Col xs="6" class="d-flex justify-content-center align-items-center" style="width: 50%">
+          <img src="/folder.gif" style="width: 300px" alt="coding" />
+        </Col>
+        <Col xs="6" class="d-flex flex-column justify-content-center align-items-center" style="padding: 50px">
+          <h3>Make Your PowerPoint Now!</h3>
+          <p>Example: Telecommunication Engineering</p>
+          <Form {validated} on:submit={(e) => e.preventDefault()}>
+            <FormGroup>
+              <Input bind:value={inputText} placeholder="Presentation title" style="width: 200px" />
+            </FormGroup>
+            <div class="button-wrapper">
+              {#if isLoading}
+                <div class="loader"></div>
+              {:else}
+                <Button class="centered-button" type="submit" on:click={handleGenerateClick}>Generate</Button>
+              {/if}
+            </div>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
+  </div>
+{:else if shouldRedirect}
+ 
+  <div class="message">
+    <img src="/markk.gif" alt="Not Logged In"/>
+    <p>{message}</p>
+  </div>
+{/if}

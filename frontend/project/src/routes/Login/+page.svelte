@@ -35,6 +35,14 @@
                     secure: true,
                     expires: 7
                 });
+                // Menyimpan email ke cookie
+                setCookie('email', email, {
+                  path: '/',
+                  sameSite: 'strict',
+                  secure: true,
+                  expires: 7
+                });
+ 
                 window.location.href = '/dashboard';
             } else {
                 const data = await response.json();
