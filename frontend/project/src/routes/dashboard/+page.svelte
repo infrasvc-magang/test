@@ -12,37 +12,29 @@
   let userEmail = '';
 
   onMount(() => {
-    const token = getCookie('token');
-    if (token) {
+    const tokenString = getCookie('token');
+    console.log('Token saat onMount:', tokenString); // Log tambahan
+    if (tokenString) {
+      try {
+      const token = JSON.parse(tokenString);
       isAuthenticated = true;
-      userEmail = getCookie('email'); // Assuming you store the user's email in a cookie
-      showGif = false; // Hide GIF immediately if authenticated
-    } else {
-      setTimeout(() => {
-        showGif = false;
-        window.location.href = '/Login'; // Redirect to login after 5 seconds
-      }, 1000); // 5000 milliseconds = 5 seconds
-    }
-  });
-
-  onMount(() => {
-    const token = getCookie('token');
-    if (token) {
       console.log('Token ada:', token);
-      isAuthenticated = true;
+      userEmail = getCookie('email'); // Assuming you store the user's email in a cookie
+      console.log('User email:', userEmail);
+      } catch (e) {
+        console.error('Error parsing token:', e);
+            isAuthenticated = false;
+        }
     } else {
       console.log('Token tidak ditemukan');
       isAuthenticated = false;
-      if (!showGif) {
-        window.location.href = '/Login';
-      }
     }
   });
 
   async function handleGenerateClick() {
     isLoading = true;
     try {
-      const response = await fetch('http://127.0.0.1:5000/generate', {
+      const response = await fetch('http://192.168.14.61/generate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -119,13 +111,6 @@
   }
 </style>
 
-{#if showGif}
-  <div class="centered-form">
-    <img src="/markk.gif" alt="Not logged in" class="centered-mark" />
-    <h3>You are not logged in!</h3>
-    <p>Please login first</p>
-  </div>
-{:else}
   {#if isAuthenticated}
     <div class="centered-form">
       <Container>
@@ -159,4 +144,3 @@
       <p>Please login first</p>
     </div>
   {/if}
-{/if}

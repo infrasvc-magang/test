@@ -1,10 +1,11 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
-    import { getCookie } from 'svelte-cookie';
+    import { onMount } from "svelte";
+    import { getCookie } from "svelte-cookie";
     import NavigationBar from "../NavigationBar/NavigationBar.svelte";
     let history = [];
     let isAuthenticated = false;
     let userEmail = '';
+  
     onMount(async () => {
       const token = getCookie('token');
       if (token) {
@@ -13,11 +14,12 @@
         await fetchHistory();
       } else {
         isAuthenticated = false;
-      }
-    });
+      }
+    });
+
     async function fetchHistory() {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/history?email=${userEmail}`);
+        const response = await fetch(`http://192.168.14.61/history?email=${userEmail}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -31,7 +33,7 @@
     async function deleteHistory(id) {
         try {
             console.log("Deleting presentation with id:", id);  // Tambahkan ini untuk debug
-            const response = await fetch('http://127.0.0.1:5000/delete_history', {
+            const response = await fetch('http://192.168.14.61/delete_history', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -49,7 +51,11 @@
             console.error('Error:', error);
         }
     }
-
+    onMount(() => {
+        if (isAuthenticated) {
+            fetchHistory();
+        }
+    });
   </script>
   <style>
     :global(html, body) {

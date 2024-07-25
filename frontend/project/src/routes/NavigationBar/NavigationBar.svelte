@@ -64,10 +64,10 @@
       <NavItem>
         <NavLink on:click={handleAboutClick} style="color: white; margin-left : 3rem">About</NavLink>
       </NavItem>
+      {#if isAuthenticated}
       <NavItem>
         <NavLink on:click={handleHistoryClick} style="color: white; margin-left : 3rem">History</NavLink>
       </NavItem>
-      {#if isAuthenticated}
       <NavItem>
         <NavLink on:click={handleLogoutClick} style="color: white; margin-left : 3rem">Logout</NavLink>
       </NavItem>

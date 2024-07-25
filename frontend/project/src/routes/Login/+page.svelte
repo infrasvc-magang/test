@@ -29,7 +29,7 @@
             if (response.ok) {
                 const token = await response.json();
                 console.log(JSON.stringify(token));
-                setCookie('token', token, {
+                setCookie('token', JSON.stringify(token), {
                     path: '/',
                     sameSite: 'strict',
                     secure: true,
