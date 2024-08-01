@@ -1,3 +1,16 @@
+# PowerPoint Material Maker using GPT
+
+Bagian frontend dari projek web development ini memungkinkan user untuk melakukan request PowerPoint dengen topik tertentu. Aplikasi ini terdiri dari enam halaman utama yaitu landing page, dashboard, login, generate, history, dan about.
+
+# Fitur-fitur
+
+- Melakukan login ke halaman dashboard
+- Melakukan request PowerPoint dengan topik tertentu
+- Melihat history request yang pernah dibuat
+- Mengunduh file PowerPoint
+- Menghapus topik pada tabel history
+- Melihat informasi mengenai aplikasi dan tim pengembang
+
 # create-svelte
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
